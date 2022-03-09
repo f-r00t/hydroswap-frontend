@@ -1,4 +1,4 @@
-import { MenuItemsType, DropdownMenuItemType } from '@pancakeswap/uikit'
+import { MenuItemsType, DropdownMenuItemType } from 'hydroswap-uikit'
 import { ContextApi } from 'contexts/Localization/types'
 import { nftsBaseUrl } from 'views/Nft/market/constants'
 
@@ -6,7 +6,7 @@ export type ConfigMenuItemsType = MenuItemsType & { hideSubNav?: boolean }
 
 const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
   {
-    label: t('Trade'),
+    label: t('Trade 📈'),
     icon: 'Swap',
     href: '/swap',
     showItemsOnMobile: false,
@@ -22,89 +22,89 @@ const config: (t: ContextApi['t']) => ConfigMenuItemsType[] = (t) => [
     ],
   },
   {
-    label: t('Earn'),
-    href: '/farms',
+    label: t('My Portfolio 💼'),
+    href: '/soon',
     icon: 'Earn',
     items: [
       {
-        label: t('Farms'),
-        href: '/farms',
+        label: t('My Tokens'),
+        href: '/soon',
       },
       {
-        label: t('Pools'),
-        href: '/pools',
+        label: t('My NFTs'),
+        href: '/soon',
       },
     ],
   },
+  // {
+  //   label: t('Win'),
+  //   href: '/prediction',
+  //   icon: 'Trophy',
+  //   items: [
+  //     {
+  //       label: t('Trading Competition'),
+  //       href: '/competition',
+  //     },
+  //     {
+  //       label: t('Prediction (BETA)'),
+  //       href: '/prediction',
+  //     },
+  //     {
+  //       label: t('Lottery'),
+  //       href: '/lottery',
+  //     },
+  //   ],
+  // },
   {
-    label: t('Win'),
-    href: '/prediction',
-    icon: 'Trophy',
-    items: [
-      {
-        label: t('Trading Competition'),
-        href: '/competition',
-      },
-      {
-        label: t('Prediction (BETA)'),
-        href: '/prediction',
-      },
-      {
-        label: t('Lottery'),
-        href: '/lottery',
-      },
-    ],
-  },
-  {
-    label: t('NFT'),
+    label: t('NFTs 🎨'),
     href: `${nftsBaseUrl}`,
     icon: 'Nft',
     items: [
       {
         label: t('Overview'),
-        href: `${nftsBaseUrl}`,
+        href: '/soon',
       },
       {
         label: t('Collections'),
-        href: `${nftsBaseUrl}/collections`,
+        href: '/soon',
       },
       {
         label: t('Activity'),
-        href: `${nftsBaseUrl}/activity`,
+        href: '/soon',
       },
     ],
   },
   {
-    label: '',
+    label: 'Info',
     href: '/info',
     icon: 'More',
     hideSubNav: true,
     items: [
       {
-        label: t('Info'),
+        label: t('Stats'),
         href: '/info',
       },
-      {
-        label: t('IFO'),
-        href: '/ifo',
-      },
-      {
-        label: t('Voting'),
-        href: '/voting',
-      },
-      {
-        type: DropdownMenuItemType.DIVIDER,
-      },
-      {
-        label: t('Leaderboard'),
-        href: '/teams',
-      },
+      // {
+      //   label: t('IFO'),
+      //   href: '/ifo',
+      // },
+      // {
+      //   label: t('Voting'),
+      //   href: '/voting',
+      // },
       {
         type: DropdownMenuItemType.DIVIDER,
       },
+      // {
+      //   label: t('Leaderboard'),
+      //   href: '/teams',
+      // },
+      // {
+      //   type: DropdownMenuItemType.DIVIDER,
+      // },
       {
-        label: t('Blog'),
-        href: 'https://medium.com/pancakeswap',
+        label: t('Project Hydro'),
+        href: 'https://projecthydro.org',
         type: DropdownMenuItemType.EXTERNAL_LINK,
       },
       {

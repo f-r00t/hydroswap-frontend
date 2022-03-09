@@ -11760,6 +11760,17 @@ husky@^7.0.0:
   resolved "https://registry.yarnpkg.com/husky/-/husky-7.0.2.tgz#21900da0f30199acca43a46c043c4ad84ae88dff"
   integrity sha512-8yKEWNX4z2YsofXAMT7KvA1g8p+GxtB1ffV8XtpAEGuXNAbCV5wdNKH+qTpw8SM9fh4aMPDR+yQuKfgnreyZlg==
 
+hydroswap-uikit@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/hydroswap-uikit/-/hydroswap-uikit-0.0.2.tgz#67578f9e67004541b53ba1cc2a2d89d3d0f23c41"
+  integrity sha512-V4EFl9OAv04nR3LL9zmKh2YvPhpNw2lL2+Y1LmOYWcn/ADY8LK1I8QrXouMEbDYvHQkLVyy9RxxNabOBc6yKBQ==
+  dependencies:
+    "@types/lodash" "^4.14.168"
+    "@types/styled-system" "^5.1.10"
+    lodash "^4.17.20"
+    react-transition-group "^4.4.1"
+    styled-system "^5.1.5"
+
 ice-cap@0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/ice-cap/-/ice-cap-0.0.4.tgz#8a6d31ab4cac8d4b56de4fa946df3352561b6e18"

@@ -14,7 +14,8 @@
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx}\"",
     "format:write": "prettier --write \"**/*.{js,jsx,ts,tsx}\"",
     "updateLPsAPR": "NODE_PATH=./src ts-node --compiler-options '{\"module\":\"commonjs\"}' scripts/updateLPsAPR.ts",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "fix": "grep -rl 0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73 node_modules/@pancakeswap/sdk/dist/ | xargs sed -i 's/0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73/0x46feaf622ce7b2a9f039856149951626e759554a/g && grep -rl 0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5 node_modules/@pancakeswap/sdk/dist/ | xargs sed -i 's/0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5/0xb9823351ca89483653e530f579a928250fc39dc928189aa3141ec6bce7079501/g'"
   },
   "browserslist": {
     "production": [
@@ -33,6 +34,7 @@
     "@ethersproject/experimental": "^5.5.0",
     "@pancakeswap/sdk": "^2.4.0",
     "@pancakeswap/uikit": "^0.61.0",
+    "hydroswap-uikit": "^0.0.5",
     "@reduxjs/toolkit": "^1.5.0",
     "@sentry/react": "^6.15.0",
     "@sentry/tracing": "^6.15.0",
