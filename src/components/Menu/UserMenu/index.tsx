@@ -16,7 +16,6 @@ import { FetchStatus, useGetBnbBalance } from 'hooks/useTokenBalance'
 import { useTranslation } from 'contexts/Localization'
 import { nftsBaseUrl } from 'views/Nft/market/constants'
 import WalletModal, { WalletView, LOW_BNB_BALANCE } from './WalletModal'
-import ProfileUserMenuItem from './ProfileUserMenutItem'
 import WalletUserMenuItem from './WalletUserMenuItem'
 
 const UserMenu = () => {
@@ -45,7 +44,6 @@ const UserMenu = () => {
       <UserMenuItem as="button" onClick={() => history.push(`${nftsBaseUrl}/profile/${account.toLowerCase()}`)}>
         {t('Your NFTs')}
       </UserMenuItem>
-      <ProfileUserMenuItem isLoading={isLoading} hasProfile={hasProfile} />
       <UserMenuDivider />
       <UserMenuItem as="button" onClick={logout}>
         <Flex alignItems="center" justifyContent="space-between" width="100%">

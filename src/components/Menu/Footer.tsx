@@ -51,7 +51,7 @@ const Footer: React.FC<{ variant?: FooterVariant }> = ({ variant = 'default' }) 
         </ButtonMenu>
         <LinkExternal
           id="ercBridge"
-          href="https://docs.binance.org/smart-chain/guides/cross-chain.html"
+          href="https://hydro-bridge.org/"
           ml={[0, 0, '40px']}
           mt={['20px', '20px', isSide ? '20px' : 0]}
           mb={['8px', '8px', 0]}
@@ -80,7 +80,7 @@ const Footer: React.FC<{ variant?: FooterVariant }> = ({ variant = 'default' }) 
             <path d="M0 16V0C0 0 3 1 6 1C9 1 16 -2 16 3.5C16 10.5 7.5 16 0 16Z" />
           </Svg>
         </BubbleWrapper>
-        <Image src="/images/help.svg" alt="Get some help" width={160} height={108} />
+        <Image src="/images/help.svg" alt="Get some help" width={1} height={108} style={{opacity: 0}} />
       </Flex>
     </Wrapper>
   )
