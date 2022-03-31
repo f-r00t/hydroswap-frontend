@@ -56,6 +56,7 @@ const Info = lazy(() => import('./views/Info'))
 const NftMarket = lazy(() => import('./views/Nft/market'))
 const ProfileCreation = lazy(() => import('./views/ProfileCreation'))
 const PancakeSquad = lazy(() => import('./views/PancakeSquad'))
+const Portfolio = lazy(() => import('./views/Portfolio'))
 
 // This config is required for number formatting
 BigNumber.config({
@@ -140,6 +141,11 @@ const App: React.FC = () => {
             {/* Info pages */}
             <Route path="/info">
               <Info />
+            </Route>
+
+            {/* Info pages */}
+            <Route path="/portfolio">
+              <Portfolio />
             </Route>
 
             {/* Using this format because these components use routes injected props. We need to rework them with hooks */}
