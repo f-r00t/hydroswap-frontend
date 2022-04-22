@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import PageSection from 'components/PageSection'
 import { useWeb3React } from '@web3-react/core'
@@ -11,10 +11,14 @@ import tokens from 'config/constants/tokens'
 import useTokenBalance, { FetchStatus, useGetBnbBalance } from 'hooks/useTokenBalance'
 import { getFullDisplayBalance, formatBigNumber } from 'utils/formatBalance'
 import { getBscScanLink } from 'utils'
-import { MoralisProvider, useERC20Balances } from "react-moralis";
+import { Moralis } from "moralis";
 
 import Page from '../Page'
 
+const API_KEY = process.env.REACT_APP_MORALIS_X_API_KEY;
+const SERVER_URL = process.env.MORALIS_SERVER_URL;
+
+console.log(process.env);
 
 
 
@@ -41,46 +45,84 @@ const Portfolio: React.FC = () => {
   const { theme } = useTheme()
   const { account } = useWeb3React()
   const { t } = useTranslation()
-  const { data: assets } = useERC20Balances();
-  console.log(assets);
 
   const HomeSectionContainerStyles = { margin: '0', width: '100%', maxWidth: '968px' }
+  const [balances, setBalances] = useState([])
 
 
-//  const contract = new library.eth.Contract(erc20abijson, '0xC9849E6fdB743d08fAeE3E34dd2D1bc69EA11a51')
+ // const contract = new library.eth.Contract(erc20abijson, '0xC9849E6fdB743d08fAeE3E34dd2D1bc69EA11a51')
 
-  // const transactions = fetch(`https://api.bscscan.com/api?module=account&action=tokentx&address=${account}&page=1&offset=5&startblock=0&endblock=999999999&sort=asc`)
-  // .then(response => response.json())
-  // .then(data => {
-  //   console.log(data);
-  //
-  //   const l = data.result.length;
-  //   for (let i = 0; i < l; i++) {
-  //
-  //     console.log(data.result[i]);
-  //
-  //     const thisTx = data.result[i];
-  //
-  //     const decimals = thisTx.tokenDecimal;
-  //
-  //     const atomic = thisTx.value;
-  //
-  //     if (tokenBalances[thisTx.contractAddress] === undefined) {
-  //
-  //       tokenBalances[thisTx.contractAddress] = { tokenName: thisTx.tokenName, tokenSymbol: thisTx.tokenSymbol, balance: (atomic / 10 ** decimals) };
-  //
-  //     } else {
-  //
-  //       tokenBalances[thisTx.contractAddress].balance += (atomic / 10 ** decimals);
-  //
-  //     }
-  //
-  //   }
-  //
-  //   console.log(tokenBalances);
-  //
-  //
-  // })
+
+  useEffect(() => {
+
+        const sleep = (ms) => {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        const sortByKey = (array, key) => {
+            return array.sort(function(a, b) {
+                const x = a[key]; const y = b[key];
+                return y - x;
+            });
+        }
+
+      const fetchPrices = async (balanceData) => {
+        const finalBalance = balanceData;
+
+        for (let i = 0; i < balanceData.length; i++) {
+
+        await sleep(200);  // eslint-disable-line no-await-in-loop
+        fetch(`https://deep-index.moralis.io/api/v2/erc20/${balanceData[i].token_address}/price?chain=bsc`, {
+        headers: {
+          'x-api-key': API_KEY,
+          'accept': 'application/json'
+        }
+      })
+      .then(
+        response => response.json()
+      )
+      .then(data => {
+
+
+
+        finalBalance[i].price = (data.usdPrice * parseFloat(getFullDisplayBalance(finalBalance[i].balance, finalBalance[i].decimals, 3))).toFixed(2);
+        if (finalBalance[i].price === "NaN") {
+          finalBalance[i].price = 0.00;
+        }
+        setBalances(sortByKey(finalBalance, 'price'));
+
+      })
+
+
+
+    }
+
+  }
+
+
+      const fetchBalance = () => {
+
+        fetch(`https://deep-index.moralis.io/api/v2/${account}/erc20?chain=bsc`, {
+        headers: {
+          'x-api-key': API_KEY,
+          'accept': 'application/json'
+        }
+      })
+      .then(
+        response => response.json()
+      )
+      .then(data => {
+
+        console.log(data);
+        fetchPrices(data);
+      })
+
+      }
+
+    if(account){
+      fetchBalance()
+    }
+  }, [account])
 
   return (
     <>
@@ -103,16 +145,13 @@ const Portfolio: React.FC = () => {
               </tr>
             </thead>
             <tbody style={{textAlign: "left"}}>
-              <tr>
-                <td>BNB</td>
-                <td>{formatBigNumber(balance, 6)}</td>
-                <td>Cell 1-3</td>
-              </tr>
-              <tr>
-                <td>HYDRO</td>
-                <td>{getFullDisplayBalance(cakeBalance, 18, 3)}</td>
-                <td>Cell 2-3</td>
-              </tr>
+              {balances.length && balances.map(token => (
+                <tr>
+                  <td>{token.name} ({token.symbol})</td>
+                  <td>{getFullDisplayBalance(token.balance, token.decimals, 2)}</td>
+                  <td>${token.price}</td>
+                </tr>
+              ))}
             </tbody>
           </Table>
           </CardFooter>
